@@ -18,6 +18,11 @@
   Creation Date:  7th Sept 2016
   Purpose/Change: Initial script development  
 #>
+
+Import-Module Azure -ErrorAction SilentlyContinue
+Set-StrictMode -Version 3
+$ErrorActionPreference = "Stop"
+
 function DeployResourceGroup{
 	[CmdletBinding()]
 	param(
@@ -27,11 +32,6 @@ function DeployResourceGroup{
 	  [Parameter(Mandatory=$True)]
 	  [string] $resourceGroupLocation
 	)
-
-	Import-Module Azure -ErrorAction SilentlyContinue
-	Set-StrictMode -Version 3
-	$ErrorActionPreference = "Stop"
-
 	# Create or update the resource group using the specified template file and template parameters file
 
 	#check if the Resource group exists, if not create it
@@ -81,10 +81,6 @@ function DeployResources{
 	  [Parameter(Mandatory=$True)]
 	  [string] $parametersFile
 	)
-
-	Import-Module Azure -ErrorAction SilentlyContinue
-	Set-StrictMode -Version 3
-	$ErrorActionPreference = "Stop"
 
 	# Create or update the resource group using the specified template file and template parameters file
 
@@ -137,10 +133,6 @@ function DeployDynamicResources{
 	  [System.Collections.Hashtable] $parameters
 	)
 
-	Import-Module Azure -ErrorAction SilentlyContinue
-	Set-StrictMode -Version 3
-	$ErrorActionPreference = "Stop"
-
 	# Create or update the resource group using the specified template file and template parameters file
 
 	#Check for the ResourceGroup
@@ -179,11 +171,7 @@ function AddResourceGroupTags{
 
 	  [Parameter(Mandatory=$True)]
 	  [hashtable] $resourceGroupTags
-	)
-
-	Import-Module Azure -ErrorAction SilentlyContinue
-	Set-StrictMode -Version 3
-	$ErrorActionPreference = "Stop"
+	)	
 
 	#check if the Resource group exists
 	$resourceGroup = Get-AzureRmResourceGroup -Name $resourceGroupName -ErrorAction SilentlyContinue
@@ -219,10 +207,6 @@ function LockResourceGroup{
 	  [Parameter(Mandatory=$True)]
 	  [string] $resourceGroupName	  
 	)
-
-	Import-Module Azure -ErrorAction SilentlyContinue
-	Set-StrictMode -Version 3
-	$ErrorActionPreference = "Stop"
 
 	#check if the Resource group exists
 	$resourceGroup = Get-AzureRmResourceGroup -Name $resourceGroupName -ErrorAction SilentlyContinue
